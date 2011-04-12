@@ -1,0 +1,7 @@
+SFHFKeychinaUtils
+=================
+
+This is a branch from Buzz Andersen's SFSHKeychainUtils.
+
+The project has been setup to be used as a Xcode subproject for better
+build handling. And code has been cleaned up to follow Cocoa coding conventions.

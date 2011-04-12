@@ -34,8 +34,8 @@
   
 }
 
-+ (NSString *) getPasswordForUsername: (NSString *) username andServiceName: (NSString *) serviceName error: (NSError **) error;
-+ (BOOL) storeUsername: (NSString *) username andPassword: (NSString *) password forServiceName: (NSString *) serviceName updateExisting: (BOOL) updateExisting error: (NSError **) error;
-+ (BOOL) deleteItemForUsername: (NSString *) username andServiceName: (NSString *) serviceName error: (NSError **) error;
++ (NSString *) passwordForUsername: (NSString *) username serviceName: (NSString *) serviceName error: (NSError **) error;
++ (BOOL) storeUsername: (NSString *) username password: (NSString *) password forServiceName: (NSString *) serviceName updateExisting: (BOOL) updateExisting error: (NSError **) error;
++ (BOOL) removePasswordForUsername: (NSString *) username serviceName: (NSString *) serviceName error: (NSError **) error;
 
 @end

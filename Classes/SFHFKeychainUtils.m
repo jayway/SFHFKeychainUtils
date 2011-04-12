@@ -195,7 +195,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 
 #else
 
-+ (NSString *) getPasswordForUsername: (NSString *) username andServiceName: (NSString *) serviceName error: (NSError **) error {
++ (NSString *) passwordForUsername: (NSString *) username serviceName: (NSString *) serviceName error: (NSError **) error {
 	if (!username || !serviceName) {
 		if (error != nil) {
 			*error = [NSError errorWithDomain: SFHFKeychainUtilsErrorDomain code: -2000 userInfo: nil];
@@ -286,7 +286,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 	return [password autorelease];
 }
 
-+ (BOOL) storeUsername: (NSString *) username andPassword: (NSString *) password forServiceName: (NSString *) serviceName updateExisting: (BOOL) updateExisting error: (NSError **) error 
++ (BOOL) storeUsername: (NSString *) username password: (NSString *) password forServiceName: (NSString *) serviceName updateExisting: (BOOL) updateExisting error: (NSError **) error 
 {		
 	if (!username || !password || !serviceName) 
   {
@@ -299,7 +299,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
 	
 	// See if we already have a password entered for these credentials.
 	NSError *getError = nil;
-	NSString *existingPassword = [SFHFKeychainUtils getPasswordForUsername: username andServiceName: serviceName error:&getError];
+	NSString *existingPassword = [SFHFKeychainUtils passwordForUsername: username serviceName: serviceName error:&getError];
   
 	if ([getError code] == -1999) 
   {
@@ -308,7 +308,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
     
 		getError = nil;
 		
-		[self deleteItemForUsername: username andServiceName: serviceName error: &getError];
+		[self removePasswordForUsername: username serviceName: serviceName error: &getError];
     
 		if ([getError code] != noErr) 
     {
@@ -396,7 +396,7 @@ static NSString *SFHFKeychainUtilsErrorDomain = @"SFHFKeychainUtilsErrorDomain";
   return YES;
 }
 
-+ (BOOL) deleteItemForUsername: (NSString *) username andServiceName: (NSString *) serviceName error: (NSError **) error 
++ (BOOL) removePasswordForUsername: (NSString *) username serviceName: (NSString *) serviceName error: (NSError **) error 
 {
 	if (!username || !serviceName) 
   {
